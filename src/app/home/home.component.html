@@ -1,0 +1,62 @@
+<h6>Welcome to the Home Page</h6>
+<p>This is the home component.</p>
+<div style="display: flex; flex-direction: row;">
+
+<div style="height: 400px; width: 100%;">
+ <h6>Lattitude: {{display?.lat}}</h6>
+  <h6>Longitude : {{display?.lng}}</h6>
+  <google-map [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"  (mapMousemove)="move($event)"
+
+  >
+  <map-marker [position]="center" *ngFor="let marker of defaultListOptions"
+  [draggable]="true"
+  [position]="marker.position"
+  [title]="marker.title"
+  [label]="marker.label"
+  (drag)="updatePosition($event)">
+    
+  </map-marker></google-map>
+
+</div>
+<div>
+  <form action="
+  " [formGroup]="loginForm" >
+  <div>
+    <label for="">Name:</label>
+    <input type="text" placeholder="Enter Name Value" formControlName="label"  >
+    <div *ngIf="loginForm?.get('label') as Label" >
+<span *ngIf="(Label.touched || Label.dirty) && Label.errors" > 
+  <span style="color: red;" *ngIf="Label.errors['required']" >
+    required
+  </span>
+</span>
+    </div>
+  </div>
+<div>
+  <label for="">Latitude:</label>
+  <input type="text" placeholder="Enter Latitude Value" formControlName="lat"  >
+  <div *ngIf="loginForm?.get('lat') as Label" >
+    <span *ngIf="(Label.touched || Label.dirty) && Label.errors" > 
+      <span style="color: red;" *ngIf="Label.errors['required']" >
+        lat is required
+      </span>
+    </span>
+        </div>
+</div>
+<hr>
+<div>
+  <label for="">Longitude:</label>
+  <input type="text" placeholder="Enter Longitude Value" formControlName="log"  >
+  <div *ngIf="loginForm?.get('log') as Label" >
+    <span *ngIf="(Label.touched || Label.dirty) && Label.errors" > 
+      <span style="color: red;" *ngIf="Label.errors['required']" >
+        log is required
+      </span>
+    </span>
+        </div>
+</div>
+<hr>
+<button type="submit" (click)="addNewMarker() "> Add Marker </button>
+</form>
+</div>
+</div>
